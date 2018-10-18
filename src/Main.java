@@ -16,6 +16,7 @@ public class Main extends Application {
     private Image image1;
     private Image image2;
     private Image image3;
+    private Label update;
 
     public static void main(String[] args) {
         launch(args);
@@ -36,6 +37,9 @@ public class Main extends Application {
         imageView = new ImageView(image0);
         imageView.setFitWidth(500);
         imageView.setPreserveRatio(true);
+        update = new Label();
+        update.setText("Bienvenue dans le modificateur d'images!");
+        borderPane.setBottom(update);
 
         creerSlider(borderPane,creerMenuBar(borderPane),creerMenuContext(borderPane));
 
@@ -57,9 +61,12 @@ public class Main extends Application {
         ContextMenu contextMenu = new ContextMenu(menuFichier, menuAction);
         imageView.setOnContextMenuRequested(event -> contextMenu.show(imageView, event.getScreenX(), event.getScreenY()));
 
-        itemImage1.setOnAction(event -> imageView.setImage(image1));
-        itemImage2.setOnAction(event -> imageView.setImage(image2));
-        itemImage3.setOnAction(event -> imageView.setImage(image3));
+        itemImage1.setOnAction(event -> {imageView.setImage(image1);
+        update.setText("Image 1 chargée");});
+        itemImage2.setOnAction(event -> {imageView.setImage(image2);
+            update.setText("Image 2 chargée");});
+        itemImage3.setOnAction(event -> {imageView.setImage(image3);
+            update.setText("Image 3 chargée");});
 
         return itemReinitialiser;
     }
@@ -78,9 +85,12 @@ public class Main extends Application {
         MenuBar menuBar = new MenuBar(menuFichier, menuAction);
         borderPane.setTop(menuBar);
 
-        itemImage1.setOnAction(event -> imageView.setImage(image1));
-        itemImage2.setOnAction(event -> imageView.setImage(image2));
-        itemImage3.setOnAction(event -> imageView.setImage(image3));
+        itemImage1.setOnAction(event -> {imageView.setImage(image1);
+            update.setText("Image 1 chargée");});
+        itemImage2.setOnAction(event -> {imageView.setImage(image2);
+            update.setText("Image 2 chargée");});
+        itemImage3.setOnAction(event -> {imageView.setImage(image3);
+            update.setText("Image 3 chargée");});
 
         return itemReinitialiser;
     }
@@ -120,13 +130,11 @@ public class Main extends Application {
             sliderContraste.setValue(0);
             sliderTeinte.setValue(0);
             sliderSaturation.setValue(0);
+            update.setText("Réinitialisation des ajustements de couleurs");
         });
 
         menuItemContext.setOnAction(event -> {
-            sliderLuminosite.setValue(0);
-            sliderContraste.setValue(0);
-            sliderTeinte.setValue(0);
-            sliderSaturation.setValue(0);
+            menuItemBar.fire();
         });
     }
 }
